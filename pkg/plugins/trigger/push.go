@@ -66,8 +66,8 @@ func handlePE(c Client, pe scm.PushHook) error {
 		return nil
 	}
 	for _, j := range c.Config.GetPostsubmits(pe.Repo) {
-		fmt.Print("triggering")
-		fmt.Printf("%+v\n", j)
+		fmt.Print("triggering, shouldrun: %t", )
+		fmt.Printf("%+v\n", j.ShouldRun(branch, listPushEventChanges(pe)))
 		debug.PrintStack()
 
 		branch := scmprovider.PushHookBranch(&pe)
