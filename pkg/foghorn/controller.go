@@ -257,6 +257,10 @@ func (r *LighthouseJobReconciler) reportStatus(activity *lighthousev1alpha1.Acti
 		return
 	}
 
+	fmt.Println("---- Setting status ----")
+	fmt.Printf("%s, %s, %s", owner, repo, sha)
+	fmt.Println("------------------------")
+
 	_, err = scmClient.CreateStatus(owner, repo, sha, gitRepoStatus)
 	if err != nil {
 		r.logger.WithFields(fields).WithError(err).Warnf("failed to report git status with target URL '%s'", gitRepoStatus.Target)
