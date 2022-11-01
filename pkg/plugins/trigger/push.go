@@ -18,6 +18,7 @@ package trigger
 
 import (
 	"fmt"
+
 	"github.com/jenkins-x/go-scm/scm"
 	"github.com/jenkins-x/lighthouse/pkg/apis/lighthouse/v1alpha1"
 	"github.com/jenkins-x/lighthouse/pkg/config/job"
@@ -87,6 +88,8 @@ func handlePE(c Client, pe scm.PushHook) error {
 		for k, v := range j.Labels {
 			labels[k] = v
 		}
+
+		fmt.Printf("Labels %+v", labels)
 
 		fmt.Println("reached 1")
 
