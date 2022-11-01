@@ -17,6 +17,7 @@ limitations under the License.
 package trigger
 
 import (
+	"fmt"
 	"github.com/jenkins-x/go-scm/scm"
 	"github.com/jenkins-x/lighthouse/pkg/apis/lighthouse/v1alpha1"
 	"github.com/jenkins-x/lighthouse/pkg/config/job"
@@ -64,6 +65,9 @@ func handlePE(c Client, pe scm.PushHook) error {
 		return nil
 	}
 	for _, j := range c.Config.GetPostsubmits(pe.Repo) {
+		fmt.Print("triggering")
+		fmt.Printf("%+v\n", j)
+
 		branch := scmprovider.PushHookBranch(&pe)
 		if shouldRun, err := j.ShouldRun(branch, listPushEventChanges(pe)); err != nil {
 			return err
