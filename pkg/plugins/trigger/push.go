@@ -83,12 +83,26 @@ func handlePE(c Client, pe scm.PushHook) error {
 		for k, v := range j.Labels {
 			labels[k] = v
 		}
+
+		fmt.Println("reached 1")
+
 		labels[scmprovider.EventGUID] = pe.GUID
+
+		fmt.Println("reached 2")
+
 		pj := jobutil.NewLighthouseJob(jobutil.PostsubmitSpec(c.Logger, j, refs), labels, j.Annotations)
+
+		fmt.Println("reached 3")
+
 		c.Logger.WithFields(jobutil.LighthouseJobFields(&pj)).Info("Creating a new LighthouseJob.")
+
+		fmt.Println("reached 4")
+
 		if _, err := c.LauncherClient.Launch(&pj); err != nil {
 			return err
 		}
+
+		fmt.Println("reached 5")
 	}
 	return nil
 }
