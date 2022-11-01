@@ -3,6 +3,7 @@ package scmprovider
 import (
 	"context"
 	"fmt"
+	"io"
 
 	"github.com/jenkins-x/go-scm/scm"
 )
@@ -78,6 +79,8 @@ func (c *Client) CreateStatus(owner, repo, ref string, s *scm.StatusInput) (*scm
 	status, res, err := c.client.Repositories.CreateStatus(ctx, fullName, ref, s)
 	fmt.Println("------- Response --------")
 	fmt.Printf("Response: %v", res)
+	b, _ := io.ReadAll(res.Body)
+	fmt.Println(string(b))
 	fmt.Println("------- end Response --------")
 	return status, err
 }
