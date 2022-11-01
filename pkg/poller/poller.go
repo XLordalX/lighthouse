@@ -317,6 +317,9 @@ func (c *pollingController) ListAllStatuses(ctx context.Context, fullName string
 			Size: StatusesPageSize,
 		}
 		statuses, response, err := c.scmClient.Repositories.ListStatus(ctx, fullName, sha, opts)
+		fmt.Println("--- Pagination statuses ---")
+		fmt.Printf("%v\n", statuses)
+		fmt.Println("----------------------")
 		if err != nil {
 			return allStatuses, err
 		}
