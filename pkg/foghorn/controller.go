@@ -216,9 +216,10 @@ func (r *LighthouseJobReconciler) reportStatus(activity *lighthousev1alpha1.Acti
 		r.logger.WithFields(fields).Debugf("Cannot report pipeline %s as we have no git repository name", activity.Name)
 		return
 	}
-
 	if os.Getenv("GIT_KIND") == "gitlab" {
+		fmt.Println("is gitlab")
 		repo = strings.Replace(repo, ".", "/", -1)
+		fmt.Println(repo)
 	}
 
 	if statusInfo.scmStatus == scm.StateUnknown {
