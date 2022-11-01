@@ -81,7 +81,7 @@ func (c *Client) CreateStatus(owner, repo, ref string, s *scm.StatusInput) (*scm
 	fmt.Printf("Response: %v", res)
 	defer res.Body.Close()
 	b, _ := io.ReadAll(res.Body)
-	fmt.Println(string(b))
+	fmt.Println("body:", string(b))
 	fmt.Println("------- end Response --------")
 	return status, err
 }
