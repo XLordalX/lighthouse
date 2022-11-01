@@ -2,6 +2,7 @@ package scmprovider
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/jenkins-x/go-scm/scm"
 )
@@ -73,6 +74,7 @@ func (c *Client) ListCollaborators(owner, repo string) ([]scm.User, error) {
 func (c *Client) CreateStatus(owner, repo, ref string, s *scm.StatusInput) (*scm.Status, error) {
 	ctx := context.Background()
 	fullName := c.repositoryName(owner, repo)
+	fmt.Println("Creating status", owner, repo, fullName, ref, s)
 	status, _, err := c.client.Repositories.CreateStatus(ctx, fullName, ref, s)
 	return status, err
 }
