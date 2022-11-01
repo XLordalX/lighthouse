@@ -290,6 +290,9 @@ func LabelsAndAnnotationsForSpec(spec v1alpha1.LighthouseJobSpec, extraLabels, e
 	if spec.Type != job.PeriodicJob && spec.Refs != nil {
 		labels[util.OrgLabel] = strings.ToLower(spec.Refs.Org)
 		labels[util.RepoLabel] = spec.Refs.Repo
+
+		fmt.Println("Setting repo label ", util.RepoLabel, spec.Refs.Repo)
+
 		labels[util.BranchLabel] = spec.GetBranch()
 		labels[util.BaseSHALabel] = spec.Refs.BaseSHA
 		if len(spec.Refs.Pulls) > 0 {
