@@ -64,8 +64,12 @@ func handlePE(c Client, pe scm.PushHook) error {
 		// we should not trigger jobs for a branch deletion
 		return nil
 	}
+
+	fmt.Println("Handling pe")
+	fmt.Printf("%+v\n", pe)
+
 	for _, j := range c.Config.GetPostsubmits(pe.Repo) {
-		fmt.Println("Handling subit")
+		fmt.Println("Handling job")
 		fmt.Printf("%+v\n", j)
 
 		branch := scmprovider.PushHookBranch(&pe)
