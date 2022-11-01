@@ -18,6 +18,7 @@ package trigger
 
 import (
 	"fmt"
+	"runtime/debug"
 	"github.com/jenkins-x/go-scm/scm"
 	"github.com/jenkins-x/lighthouse/pkg/apis/lighthouse/v1alpha1"
 	"github.com/jenkins-x/lighthouse/pkg/config/job"
@@ -67,6 +68,7 @@ func handlePE(c Client, pe scm.PushHook) error {
 	for _, j := range c.Config.GetPostsubmits(pe.Repo) {
 		fmt.Print("triggering")
 		fmt.Printf("%+v\n", j)
+		debug.PrintStack()
 
 		branch := scmprovider.PushHookBranch(&pe)
 		if shouldRun, err := j.ShouldRun(branch, listPushEventChanges(pe)); err != nil {
