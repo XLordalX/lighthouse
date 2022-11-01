@@ -2,6 +2,7 @@ package poller
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -285,6 +286,16 @@ func (c *pollingController) pollPullRequestPushHook(ctx context.Context, l *logr
 
 func (c *pollingController) hasStatusForSHA(ctx context.Context, l *logrus.Entry, fullName string, sha string, isRelease bool) (bool, error) {
 	statuses, err := c.ListAllStatuses(ctx, fullName, sha)
+
+	fmt.Println("--- statuses start ---")
+	fmt.Printf("%v", statuses)
+	fmt.Println("--- statuses end ---")
+
+	fmt.Println("--- sha start ---")
+	fmt.Println(sha)
+	fmt.Println(fullName)
+	fmt.Println("--- sha end ---")
+
 	if err != nil {
 		return false, errors.Wrapf(err, "failed to list status")
 	}
