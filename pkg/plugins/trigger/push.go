@@ -18,7 +18,6 @@ package trigger
 
 import (
 	"fmt"
-	"runtime/debug"
 	"github.com/jenkins-x/go-scm/scm"
 	"github.com/jenkins-x/lighthouse/pkg/apis/lighthouse/v1alpha1"
 	"github.com/jenkins-x/lighthouse/pkg/config/job"
