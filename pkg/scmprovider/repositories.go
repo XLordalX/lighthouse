@@ -75,7 +75,10 @@ func (c *Client) CreateStatus(owner, repo, ref string, s *scm.StatusInput) (*scm
 	ctx := context.Background()
 	fullName := c.repositoryName(owner, repo)
 	fmt.Println("Creating status", owner, repo, fullName, ref, s)
-	status, _, err := c.client.Repositories.CreateStatus(ctx, fullName, ref, s)
+	status, res, err := c.client.Repositories.CreateStatus(ctx, fullName, ref, s)
+	fmt.Println("------- Response --------")
+	fmt.Printf("Response: %v", res)
+	fmt.Println("------- end Response --------")
 	return status, err
 }
 
