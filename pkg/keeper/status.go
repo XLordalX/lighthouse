@@ -448,6 +448,7 @@ func (sc *statusController) sync(pool map[string]prWithStatus, blocks blockers.B
 	defer func() {
 		duration := time.Since(sc.lastSyncStart)
 		sc.logger.WithField("duration", duration.String()).Info("Statuses synced.")
+		fmt.Println("Test")
 		keeperMetrics.statusUpdateDuration.Set(duration.Seconds())
 	}()
 

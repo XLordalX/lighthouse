@@ -1174,6 +1174,8 @@ func tryMerge(mergeFunc func() error) (bool, error) {
 }
 
 func (c *DefaultController) trigger(sp subpool, presubmits map[int][]job.Presubmit, prs []PullRequest) error {
+	fmt.Println("Triggering")
+	
 	refs := v1alpha1.Refs{
 		Org:      sp.org,
 		Repo:     sp.repo,

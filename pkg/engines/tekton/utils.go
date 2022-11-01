@@ -7,6 +7,8 @@ import (
 	"strings"
 	"text/template"
 	"time"
+	"fmt"
+	"runtime/debug"
 
 	"github.com/jenkins-x/lighthouse/pkg/apis/lighthouse/v1alpha1"
 	"github.com/jenkins-x/lighthouse/pkg/jobutil"
@@ -45,6 +47,9 @@ func trimDashboardURL(base string) string {
 // makePipeline creates a PipelineRun and substitutes LighthouseJob managed pipeline resources with ResourceSpec instead of ResourceRef
 // so that we don't have to take care of potentially dangling created pipeline resources.
 func makePipelineRun(ctx context.Context, lj v1alpha1.LighthouseJob, namespace string, logger *logrus.Entry, idGen buildIDGenerator, c client.Reader) (*tektonv1beta1.PipelineRun, error) {
+	debug.PrintStack()
+	fmt.Println("making pipeline run")
+	
 	// First validate.
 	if lj.Spec.PipelineRunSpec == nil {
 		return nil, errors.New("no PipelineSpec defined")
