@@ -90,6 +90,9 @@ func handlePE(c Client, pe scm.PushHook) error {
 		}
 
 		fmt.Printf("Labels %+v", labels)
+		for k, v := range labels {
+			fmt.Println(k, "value is", v)
+		}
 
 		fmt.Println("reached 1")
 
