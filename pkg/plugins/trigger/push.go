@@ -66,17 +66,19 @@ func handlePE(c Client, pe scm.PushHook) error {
 		return nil
 	}
 	for _, j := range c.Config.GetPostsubmits(pe.Repo) {
-		branch := scmprovider.PushHookBranch(&pe)
+		fmt.Println("Handling subit")
+		fmt.Printf("%+v\n", j)
 
-		fmt.Print("triggering, shouldrun: %t", )
-		fmt.Printf("%+v\n", j.ShouldRun(branch, listPushEventChanges(pe)))
-		debug.PrintStack()
-		
+		branch := scmprovider.PushHookBranch(&pe)
 		if shouldRun, err := j.ShouldRun(branch, listPushEventChanges(pe)); err != nil {
 			return err
 		} else if !shouldRun {
+			fmt.Println("Should not run")
 			continue
 		}
+
+		fmt.Println("triggering")
+
 		refs := createRefs(&pe)
 		labels := make(map[string]string)
 		for k, v := range j.Labels {
