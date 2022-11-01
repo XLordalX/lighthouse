@@ -320,6 +320,8 @@ func (o *WebhooksController) handleWebhookOrPollRequest(w http.ResponseWriter, r
 
 // ProcessWebHook process a webhook
 func (o *WebhooksController) ProcessWebHook(l *logrus.Entry, webhook scm.Webhook) (*logrus.Entry, string, error) {
+	fmt.Println("processing hook")
+	fmt.Printf("%+v\n", webhook)
 	repository := webhook.Repository()
 	fields := map[string]interface{}{
 		"Namespace": repository.Namespace,
