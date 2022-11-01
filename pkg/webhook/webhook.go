@@ -208,6 +208,10 @@ func (o *WebhooksController) handleWebhookOrPollRequest(w http.ResponseWriter, r
 	fmt.Println(r.Body)
 	fmt.Println("-- body end --")
 
+	fmt.Println("-- req start --")
+	fmt.Printf("%v", r)
+	fmt.Println("-- req end --")
+
 	webhook, err := parseWebhook(scmClient, r)
 	if err != nil {
 		logrus.Warnf("failed to parse webhook: %s", err.Error())
