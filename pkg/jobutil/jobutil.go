@@ -19,7 +19,6 @@ package jobutil
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -312,9 +311,9 @@ func LabelsAndAnnotationsForSpec(spec v1alpha1.LighthouseJobSpec, extraLabels, e
 		if errs := validation.IsValidLabelValue(value); len(errs) > 0 {
 			// ToDo: Use util.GitKind function instead
 			// For nested repos only in gitlab, we do not want to remove the sub group name, which comes before /
-			if key == util.RepoLabel && os.Getenv("GIT_KIND") == "gitlab" {
-				value = strings.Replace(value, "/", "-", -1)
-			}
+			// if key == util.RepoLabel && os.Getenv("GIT_KIND") == "gitlab" {
+			// 	value = strings.Replace(value, "/", "-", -1)
+			// }
 			// try to use basename of a path, if path contains invalid //
 			base := filepath.Base(value)
 			if errs := validation.IsValidLabelValue(base); len(errs) == 0 {
