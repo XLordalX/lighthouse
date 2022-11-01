@@ -3,6 +3,7 @@ package foghorn
 import (
 	"context"
 	"fmt"
+	"os"
 	"reflect"
 	"strings"
 	"sync"
@@ -214,6 +215,10 @@ func (r *LighthouseJobReconciler) reportStatus(activity *lighthousev1alpha1.Acti
 	if repo == "" {
 		r.logger.WithFields(fields).Debugf("Cannot report pipeline %s as we have no git repository name", activity.Name)
 		return
+	}
+
+	if os.Getenv("GIT_KIND") == "gitlab" {
+		repo = strings.Replace(repo, ".", "/", -1)
 	}
 
 	if statusInfo.scmStatus == scm.StateUnknown {
